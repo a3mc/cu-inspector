@@ -42,6 +42,11 @@ This Rust program inspects the Solana validator's produced slots within the curr
     cargo install --path .
     ```
 
+Alternatively you can run the following:
+```bash
+cargo run <validator_identity>
+```
+
 ## Usage
 
 The program requires exactly one argument: the validator's public key (`validator_identity`). For example:

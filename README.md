@@ -68,7 +68,15 @@ The program requires exactly one argument: the validator's public key (`validato
 By default, the program uses:
 
 RPC URL: https://api.mainnet-beta.solana.com
-TOTAL_CAPABLE_CU: 48_000_000
+
+The per-block CU limit is not a fixed constant: it is read from the chain on
+every run by checking the `raise_block_limits_to_*` feature-gate accounts
+(anza-xyz/agave `feature-set/src/lib.rs`) against the current slot, and
+falls back to 48_000_000 (the pre-SIMD-0207 default) if none of the known
+gates have activated. SIMD-0286 raised it to 100_000_000 as of mainnet slot
+435,888,000; add the next SIMD's gate to `BLOCK_LIMIT_GATES` in `main.rs`
+when the limit moves again rather than editing a literal.
+
 If you wish to change the RPC endpoint, you can edit the following line in main():
 
 ```
